@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <title>Taller de Costura Marbelly | Cuentas de pago</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18212f;
+      --muted: #5c6675;
+      --line: #d9e2e0;
+      --surface: #ffffff;
+      --surface-soft: #f6faf9;
+      --teal: #0f766e;
+      --teal-dark: #0b5f59;
+      --bac: #c91f32;
+      --bac-dark: #981829;
+      --banpro: #007a3d;
+      --banpro-dark: #005b31;
+      --lafise: #0b4f3d;
+      --lafise-dark: #07382c;
+      --shadow: 0 18px 40px rgba(24, 33, 47, 0.11);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 32rem),
+        linear-gradient(180deg, #f8fbfa 0%, #edf6f4 100%);
+      color: var(--ink);
+    }
+
+    .page {
+      width: min(100%, 480px);
+      margin: 0 auto;
+      padding: 20px 16px 28px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 214px;
+      padding: 24px 22px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.96), rgba(14, 105, 129, 0.88)),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.12) 50%, transparent 50%);
+      box-shadow: var(--shadow);
+      color: #fff;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto;
+      display: none;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -44px;
+      bottom: -42px;
+      border: 18px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.14);
+      z-index: -1;
+    }
+
+    .stitch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 34px;
+      margin-bottom: 24px;
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .stitch svg {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+    }
+
+    .overlock {
+      position: absolute;
+      right: -12px;
+      top: 24px;
+      width: 170px;
+      height: 88px;
+      color: rgba(255, 255, 255, 0.42);
+      transform: rotate(-24deg);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 12ch;
+      font-size: clamp(2.35rem, 13vw, 4rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .hero p {
+      margin: 18px 0 0;
+      max-width: 28ch;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .accounts {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .account {
+      --bank: var(--teal);
+      --bank-dark: var(--teal-dark);
+      --bank-soft: #eef8f6;
+      --bank-shadow: rgba(15, 118, 110, 0.23);
+      display: grid;
+      gap: 16px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--bank);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 26px rgba(24, 33, 47, 0.06);
+    }
+
+    .account--bac {
+      --bank: var(--bac);
+      --bank-dark: var(--bac-dark);
+      --bank-soft: #fff0f2;
+      --bank-shadow: rgba(201, 31, 50, 0.22);
+    }
+
+    .account--banpro {
+      --bank: var(--banpro);
+      --bank-dark: var(--banpro-dark);
+      --bank-soft: #edf8f1;
+      --bank-shadow: rgba(0, 122, 61, 0.23);
+    }
+
+    .account--lafise {
+      --bank: var(--lafise);
+      --bank-dark: var(--lafise-dark);
+      --bank-soft: #edf7f3;
+      --bank-shadow: rgba(11, 79, 61, 0.24);
+    }
+
+    .account__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .account h2 {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .money-mark {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--bank);
+      color: #fff;
+      font-size: 0.86rem;
+      font-weight: 850;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .currency {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--bank-soft);
+      color: var(--bank-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .number-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 13px 13px 15px;
+      border-radius: 14px;
+      background: var(--surface-soft);
+      border: 1px solid #e4ecea;
+    }
+
+    .account-number {
+      min-width: 0;
+      color: var(--bank-dark);
+      font-size: clamp(1.32rem, 7vw, 1.82rem);
+      line-height: 1.08;
+      font-weight: 820;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .copy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 84px;
+      height: 46px;
+      flex: 0 0 auto;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--bank);
+      color: #fff;
+      box-shadow: 0 10px 18px var(--bank-shadow);
+      cursor: pointer;
+      touch-action: manipulation;
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 820;
+      white-space: nowrap;
+    }
+
+    .copy:active {
+      transform: translateY(1px);
+      background: var(--bank-dark);
+    }
+
+    .copy svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .beneficiary {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.42;
+    }
+
+    .beneficiary strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+    }
+
+    .footer {
+      margin: 20px 0 0;
+      padding: 0 4px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      z-index: 10;
+      width: min(calc(100% - 32px), 360px);
+      padding: 13px 16px;
+      border-radius: 999px;
+      background: #17202c;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: center;
+      box-shadow: 0 14px 34px rgba(24, 33, 47, 0.28);
+      opacity: 0;
+      transform: translate(-50%, 18px);
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (min-width: 700px) {
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      .page {
+        padding-block: 38px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .number-row {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .copy {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <svg class="overlock" viewBox="0 0 190 96" aria-hidden="true" fill="none">
+        <path d="M10 34h160" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+        <path d="M10 62h160" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" opacity=".7"/>
+        <path d="M18 34l18 28 18-28 18 28 18-28 18 28 18-28 18 28 18-28" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="stitch">
+        <svg viewBox="0 0 48 48" aria-hidden="true" fill="none">
+          <path d="M10 34h28a4 4 0 0 0 4-4v-5a8 8 0 0 0-8-8H23V9h-7v8h-4a6 6 0 0 0-6 6v7a4 4 0 0 0 4 4Z" stroke="currentColor" stroke-width="2.7" stroke-linejoin="round"/>
+          <path d="M16 9h12" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+          <path d="M12 34v6h26v-6" stroke="currentColor" stroke-width="2.7" stroke-linejoin="round"/>
+          <path d="M30 17v11" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+          <circle cx="35" cy="24" r="3" stroke="currentColor" stroke-width="2.4"/>
+          <path d="M12 27h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" opacity=".9"/>
+        </svg>
+        Cuentas de pago
+      </div>
+      <h1 id="page-title">Taller de Costura Marbelly</h1>
+      <p>Selecciona la cuenta de tu banco y copia el número limpio para pegarlo en tu app.</p>
+    </section>
+
+    <section class="accounts" aria-label="Cuentas bancarias">
+      <article class="account account--bac">
+        <div class="account__top">
+          <h2>BAC <span class="money-mark">C$</span></h2>
+          <span class="currency">Córdobas</span>
+        </div>
+        <div class="number-row">
+          <div class="account-number" aria-label="Número de cuenta 371275645">371 275 645</div>
+          <button class="copy" type="button" data-copy="371275645" aria-label="Copiar cuenta BAC córdobas">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+              <rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M5 15V7a2 2 0 0 1 2-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Copiar
+          </button>
+        </div>
+        <p class="beneficiary"><strong>Beneficiario</strong>Marbelly del Carmen Carcache Palacios</p>
+      </article>
+
+      <article class="account account--bac">
+        <div class="account__top">
+          <h2>BAC <span class="money-mark">US$</span></h2>
+          <span class="currency">Dólares</span>
+        </div>
+        <div class="number-row">
+          <div class="account-number" aria-label="Número de cuenta 371275546">371 275 546</div>
+          <button class="copy" type="button" data-copy="371275546" aria-label="Copiar cuenta BAC dólares">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+              <rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M5 15V7a2 2 0 0 1 2-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Copiar
+          </button>
+        </div>
+        <p class="beneficiary"><strong>Beneficiario</strong>Marbelly del Carmen Carcache Palacios</p>
+      </article>
+
+      <article class="account account--banpro">
+        <div class="account__top">
+          <h2>BANPRO <span class="money-mark">C$</span></h2>
+          <span class="currency">Córdobas</span>
+        </div>
+        <div class="number-row">
+          <div class="account-number" aria-label="Número de cuenta 10020400626848">100 20 400 626848</div>
+          <button class="copy" type="button" data-copy="10020400626848" aria-label="Copiar cuenta BANPRO córdobas">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+              <rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M5 15V7a2 2 0 0 1 2-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Copiar
+          </button>
+        </div>
+        <p class="beneficiary"><strong>Beneficiario</strong>Alexander Antonio Meléndez Carcache</p>
+      </article>
+
+      <article class="account account--lafise">
+        <div class="account__top">
+          <h2>LAFISE <span class="money-mark">C$</span></h2>
+          <span class="currency">Córdobas</span>
+        </div>
+        <div class="number-row">
+          <div class="account-number" aria-label="Número de cuenta 119024683">1190 24 683</div>
+          <button class="copy" type="button" data-copy="119024683" aria-label="Copiar cuenta LAFISE córdobas">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+              <rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M5 15V7a2 2 0 0 1 2-2h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Copiar
+          </button>
+        </div>
+        <p class="beneficiary"><strong>Beneficiario</strong>Alexander Antonio Meléndez Carcache</p>
+      </article>
+    </section>
+
+    <p class="footer">Toca el botón junto al número para copiar la cuenta sin espacios.</p>
+  </main>
+
+  <div class="toast" role="status" aria-live="polite">Cuenta copiada</div>
+
+  <script>
+    const toast = document.querySelector(".toast");
+    let toastTimer;
+
+    async function copyAccount(value) {
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        const input = document.createElement("input");
+        input.value = value;
+        input.setAttribute("readonly", "");
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+      }
+
+      toast.classList.add("is-visible");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("is-visible");
+      }, 1700);
+    }
+
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", () => copyAccount(button.dataset.copy));
+    });
+  </script>
+</body>
+</html>
