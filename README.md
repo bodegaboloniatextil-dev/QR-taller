@@ -25,3 +25,9 @@ El QR estara disponible en:
 ```text
 https://bodegaboloniatextil-dev.github.io/QR-taller/qr.html
 ```
+
+Tambien se incluye el QR en PNG:
+
+```text
+qr-taller-marbelly.png
+```
