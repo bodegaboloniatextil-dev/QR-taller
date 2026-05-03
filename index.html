@@ -48,7 +48,7 @@
       position: relative;
       overflow: hidden;
       min-height: 214px;
-      padding: 24px 22px;
+      padding: 22px 22px 20px;
       border-radius: 22px;
       background:
         linear-gradient(135deg, rgba(15, 118, 110, 0.96), rgba(14, 105, 129, 0.88)),
@@ -84,7 +84,7 @@
       align-items: center;
       gap: 10px;
       min-height: 34px;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       font-size: 0.82rem;
       font-weight: 750;
       letter-spacing: 0;
@@ -111,19 +111,61 @@
 
     h1 {
       margin: 0;
-      max-width: 12ch;
-      font-size: clamp(2.35rem, 13vw, 4rem);
-      line-height: 0.92;
+      max-width: 13ch;
+      font-size: clamp(2rem, 10.5vw, 3.2rem);
+      line-height: 0.96;
       letter-spacing: 0;
       text-wrap: balance;
     }
 
     .hero p {
-      margin: 18px 0 0;
-      max-width: 28ch;
+      margin: 13px 0 0;
+      max-width: 29ch;
       color: rgba(255, 255, 255, 0.86);
       font-size: 1rem;
       line-height: 1.45;
+    }
+
+    .location-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 19px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .location {
+      margin: 0;
+      color: #fff;
+      font-size: 0.93rem;
+      font-weight: 780;
+      line-height: 1.2;
+    }
+
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 790;
+      text-decoration: none;
+      white-space: nowrap;
+      backdrop-filter: blur(6px);
+    }
+
+    .map-link svg {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
     }
 
     .accounts {
@@ -329,6 +371,11 @@
     }
 
     @media (max-width: 370px) {
+      .location-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       .number-row {
         align-items: stretch;
         flex-direction: column;
@@ -361,6 +408,16 @@
       </div>
       <h1 id="page-title">Taller de Costura Marbelly</h1>
       <p>Selecciona la cuenta de tu banco y copia el número limpio para pegarlo en tu app.</p>
+      <div class="location-row">
+        <span class="location">Colonia Centroamérica</span>
+        <a class="map-link" href="https://maps.app.goo.gl/bCTpL3Ty87wHpWgz9" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none">
+            <path d="M12 21s7-5.4 7-12A7 7 0 0 0 5 9c0 6.6 7 12 7 12Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          Ver ubicación
+        </a>
+      </div>
     </section>
 
     <section class="accounts" aria-label="Cuentas bancarias">
